@@ -1,0 +1,65 @@
+CREATE TABLE Customers (
+       CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+       FullName VARCHAR(100) NOT NULL,
+       PhoneNumber VARCHAR(15) NOT NULL,
+       Email VARCHAR(100)
+);
+
+CREATE TABLE RestaurantTables (
+       TableID INT PRIMARY KEY AUTO_INCREMENT,
+       TableNumber INT NOT NULL,
+       Capacity INT NOT NULL,
+       Location VARCHAR(50),
+       Status VARCHAR(20) DEFAULT 'Available'
+);
+
+CREATE TABLE RESERVATIONS (
+       ReservationID INT PRIMARY KEY AUTO_INCREMENT,
+       CustomerID INT,
+       TableID INT,
+       ReservationDate DATE NOT NULL,
+       ReservationTime TIME NOT NULL, 
+       NumberOfGuests INT NOT NULL,
+       Notes TEXT,
+       FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+       FOREIGN KEY (TableID) REFERENCES RestaurantTables(TableID)
+);
+
+INSERT INTO Customers(FullName, PhoneNumber, Email)
+            VALUES('Jane Doe', '123-456-7890', 'jane@example.com');
+INSERT INTO Customers(FullName, PhoneNumber, Email)
+            VALUES('John Smith', '234-567-8901', 'john@example.com');
+INSERT INTO Customers(FullName, PhoneNumber, Email)
+            VALUES('Maria Gonzalez', '345-678-9012', 'maria@example.com');
+INSERT INTO Customers(FullName, PhoneNumber, Email)
+            VALUES('David Lee', '456-789-0123', 'david@example.com');
+INSERT INTO Customers(FullName, PhoneNumber, Email)
+            VALUES('Amina Yusuf', '567-890-1234', 'amina@example.com');
+
+INSERT INTO RestaurantTables(TableNumber, Capacity, Location)
+            VALUES(1, 2, 'Window');
+INSERT INTO RestaurantTables(TableNumber, Capacity, Location)
+            VALUES(2, 4, 'Center');
+INSERT INTO RestaurantTables(TableNumber, Capacity, Location)
+            VALUES(3, 6, 'Patio');
+INSERT INTO RestaurantTables(TableNumber, Capacity, Location)
+            VALUES(4, 4, 'Corner');
+INSERT INTO RestaurantTables(TableNumber, Capacity, Location)
+            VALUES(5, 2, 'Booth');
+
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(1, 2, '2025-05-30', '19:00:00', 2);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(2, 3, '2025-05-30', '19:00:00', 5);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(3, 1, '2025-05-29', '18:30:00', 2);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(1, 4, '2025-05-28', '20:00:00', 3);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(4, 5, '2025-05-30', '19:00:00', 2);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(1, 2, '2025-05-27', '17:00:00', 4);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(2, 3, '2025-05-31', '18:00:00', 4);
+INSERT INTO Reservations(CustomerID, TableID, ReservationDate, ReservationTime, NumberOfGuests)
+            VALUES(5, 4, '2025-05-30', '18:30:00', 4);
